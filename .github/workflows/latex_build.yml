@@ -16,5 +16,5 @@ jobs:
       - name: Save PDF as Artifact
         uses: actions/upload-artifact@v3
         with:
-          name: article/main.pdf
+          name: main
           path: article/main.pdf
