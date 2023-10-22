@@ -1,0 +1,36 @@
+name: Build LaTeX document to release
+
+on:
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  create-release:
+    if: github.event.pull_request.merged
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Github Action for LaTeX
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: main.tex
+          working_directory: article/
+          continue_on_error: true
+
+      -
+        name: Create Release ${{ github.event.pull_request.title }}
+        uses: bfren/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.PAT }}
+
+      - name: Upload Release Asset
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ github.event.pull_request.title }} article/main.pdf
+      
