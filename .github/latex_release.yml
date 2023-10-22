@@ -1,6 +1,6 @@
 name: Build LaTeX document to release
 
-on: [main]
+on: [push]
 
 jobs:
   create-release:
