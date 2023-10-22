@@ -10,8 +10,8 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: article/main.tex
-          working_directory: monograph/
+          root_file: main.tex
+          working_directory: article/
           continue_on_error: true
       - name: Save PDF as Artifact
         uses: actions/upload-artifact@v3
