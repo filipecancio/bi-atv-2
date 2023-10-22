@@ -1,13 +1,9 @@
 name: Build LaTeX document to release
 
-on:
-  pull_request:
-    types: [closed]
-  workflow_dispatch:
+on: [main]
 
 jobs:
   create-release:
-    if: github.event.pull_request.merged
     permissions:
       contents: write
     runs-on: ubuntu-latest
